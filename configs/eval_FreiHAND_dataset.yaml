@@ -1,0 +1,13 @@
+MODEL:
+  DEVICE: "cuda:0"
+  NUM_WORKERS: 2
+  BATCH_SIZE: 8
+  NUM_JOINTS: 21
+  PRETRAIN_WEIGHT:
+    HM_NET_PATH: "./model/trained_models/net_hm.pth"
+EVAL:
+  SAVE_DIR: "./output"
+  SAVE_BATCH_IMAGES_PRED: True
+  PRINT_FREQ: 40
+  SAVE_POSE_ESTIMATION: True
+  DATASET: "FreiHAND_test"
