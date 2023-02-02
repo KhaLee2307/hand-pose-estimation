@@ -1,12 +1,9 @@
-"""
-Real time 2D hand pose estimation using RGB webcam
-"""
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import mediapipe as mp
 import torch
 import cv2
 
@@ -14,8 +11,6 @@ from hand_shape_pose.config import cfg
 from hand_shape_pose.model.pose_network import PoseNetwork
 
 from hand_shape_pose.util.vis_pose_only import draw_2d_skeleton
-
-import numpy as np
 
 ### specify inputs ###
 config_file = "configs/eval_webcam.yaml"
@@ -35,51 +30,71 @@ model.to(device)
 model.load_model(cfg)
 model = model.eval()
 
+mp_hands = mp.solutions.hands
 # webcam settings - default image size [640x480]
 cap = cv2.VideoCapture(0)
 
-# preset variables
-ratio_dim = (cropped_dim[0]/resize_dim[0], cropped_dim[1]/resize_dim[1])
-avg_est_pose_uv = np.zeros((21,2))
-avg_frame = 0
+with mp_hands.Hands(model_complexity=0,min_detection_confidence=0.5,min_tracking_confidence=0.5) as hands:
+    while(True):
+        # Capture frame-by-frame
+        ret, frame = cap.read()
 
-while(True):
-    # Capture frame-by-frame
-    ret, frame = cap.read()
-    frame = frame[:,80:560,:]   # cut the frame to 480x480
-    original_frame = frame.copy()
-    frame = cv2.resize(frame, (resize_dim[1], resize_dim[0]))
-    frame = frame.reshape((-1,resize_dim[1], resize_dim[0], 3))
-    frame_device = torch.from_numpy(frame).to(device)
-    
-    # feed forward the model to obtain 2D hand pose
-    with torch.no_grad():
-        _, est_pose_uv = model(frame_device)
-    est_pose_uv = est_pose_uv.to('cpu')
+        # Detect hand
+        frame.flags.writeable = False
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        results = hands.process(frame)
+        frame.flags.writeable = True
+        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
 
-    # shift est_pose_uv to calibrate pose position in the image
-    est_pose_uv[0,:,0] = est_pose_uv[0,:,0]*ratio_dim[0]
-    est_pose_uv[0,:,1] = est_pose_uv[0,:,1]*ratio_dim[1]
+        if results.hand_rects is not None and len(results.hand_rects) == 1:
+            a = results.hand_rects[0]
+            h, w, c = frame.shape
+            x = int(a.x_center * w)
+            y = int(a.y_center * h)
+            height = int(a.height * h * 0.9)
+            weight = int(a.width * w * 0.9)
+            he = int(a.height * h * 1.3)
+            wi = int(a.width * w * 1.3)
+            x1, y1 = x-wi//2, y-he//2
+            x2, y2 = x+wi//2, y+he//2
+            a1, b1 = x-weight//2, y-height//2
+            a2, b2 = x+weight//2, y+height//2
+            if (x1 < 0 or y1 < 0 or x2 > 640 or y2 > 480):
+                cv2.imshow('hand pose estimation', cv2.flip(frame, 1))
+            else:
+                original_image = frame.copy()
+                frame = frame[y1:y2, x1:x2, :]  # cut the frame of hand
+                frame = cv2.resize(frame, resize_dim)
+                frame = frame.reshape((-1, resize_dim[1], resize_dim[0], 3))
+                frame_device = torch.from_numpy(frame).to(device)
+                
+                # feed forward the model to obtain 2D hand pose
+                with torch.no_grad():
+                    _, est_pose_uv = model(frame_device)
+                est_pose_uv = est_pose_uv.to('cpu')
 
-    # average hand pose with 3 frames to stabilize noise
-    avg_est_pose_uv += est_pose_uv[0].detach().numpy()
-    avg_frame += 1
-    
-    # Display the resulting frame
-    if avg_frame == avg_per_frame:
-        avg_frame = 0
-        avg_est_pose_uv = avg_est_pose_uv/avg_per_frame + 25    # manual tuning to fit hand pose on top of the hand
-        avg_est_pose_uv[:,1] += 10                              # same here
+                # shift est_pose_uv to calibrate pose position in the image
+                est_pose_uv[0,:,0] = est_pose_uv[0,:,0]*(x2 - x1)/resize_dim[1]
+                est_pose_uv[0,:,1] = est_pose_uv[0,:,1]*(y2 - y1)/resize_dim[0]
 
-        # draw 2D hand pose
-        skeleton_frame = draw_2d_skeleton(original_frame, avg_est_pose_uv)
-        
-        # plot hand poses
-        cv2.imshow('hand pose estimation', skeleton_frame)
-        avg_est_pose_uv = np.zeros((21,2))
-        
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+                est_pose_uv[0,:,0] += x1
+                est_pose_uv[0,:,1] += y1
+                
+                est_pose_uv = est_pose_uv[0].detach().numpy()
+                
+                # Display the resulting frame
+                est_pose_uv += 20    # manual tuning to fit hand pose on top of the hand
+
+                # draw 2D hand pose
+                cv2.rectangle(original_image, (a1, b1),(a2, b2),(0, 255, 0), 2)
+                skeleton_frame = draw_2d_skeleton(original_image, est_pose_uv)
+                
+                # plot hand poses
+                cv2.imshow('hand pose estimation', cv2.flip(skeleton_frame, 1))
+        else:
+            cv2.imshow('hand pose estimation', cv2.flip(frame, 1))
+        if cv2.waitKey(5) & 0xFF == 27:
+            break
 
 # When everything done, release the capture
 cap.release()
