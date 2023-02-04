@@ -30,7 +30,6 @@ def find_keypoints_max(heatmaps):
 def compute_uv_from_heatmaps(hm, resize_dim):
   """
   :param hm: B x K x H x W (Variable)
-  :param resize_dim:
   :return: uv in resize_dim (Variable)
   """
   upsample = nn.Upsample(size=resize_dim, mode='bilinear')  # (B x K) x H x W
