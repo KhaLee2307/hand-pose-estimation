@@ -67,7 +67,6 @@ class Hourglass(nn.Module):
 class Net_HM_HG(nn.Module):
     def __init__(self, num_joints, num_stages=2, num_modules=2, num_feats=256):
         super(Net_HM_HG, self).__init__()
-
         self.numOutput = num_joints
         self.nStack = num_stages
 
