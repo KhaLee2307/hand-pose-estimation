@@ -47,7 +47,7 @@ class PoseNetwork(nn.Module):
         else:
             hands = self.detector.detect(cv2.cvtColor(input, cv2.COLOR_BGR2RGB))
             if hands is not None:
-                coord, frame = crop_frame(input, hands, ratio= 0.6)
+                coord, frame = crop_frame(input, hands, ratio= 0.4)
                 if coord is not None:
                     frame = cv2.resize(frame, RESIZE_DIM)
                     frame = frame.reshape((-1, RESIZE_DIM[1], RESIZE_DIM[0], 3))

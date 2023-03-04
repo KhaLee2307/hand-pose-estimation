@@ -1,5 +1,7 @@
-matplotlib
+python==3.8.16
+pytorch-cuda==11.7
+tensorflow
 opencv-python
-scipy
+matplotlib
 yacs
-
+scipy

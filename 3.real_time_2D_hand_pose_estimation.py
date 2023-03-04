@@ -47,7 +47,7 @@ while(True):
         est_pose_uv = est_pose_uv[0].detach().numpy()
 
         # Display the resulting frame
-        est_pose_uv += 20    # manual tuning to fit hand pose on top of the hand
+        est_pose_uv += 16    # manual tuning to fit hand pose on top of the hand
 
         # draw 2D hand pose
         cv2.rectangle(frame, (coord[0], coord[1]),(coord[2], coord[3]), (0, 255, 0), 2)
