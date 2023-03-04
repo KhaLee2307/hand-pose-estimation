@@ -36,7 +36,7 @@ def main():
     cfg.merge_from_list(args.opts)
     cfg.freeze()
 
-    output_dir = osp.join(cfg.EVAL.SAVE_DIR, args.config_file)
+    output_dir = cfg.EVAL.SAVE_DIR
     mkdir(output_dir)
     logger = setup_logger("hand_shape_pose_inference", output_dir, filename='eval-' + get_logger_filename())
     logger.info(cfg)
