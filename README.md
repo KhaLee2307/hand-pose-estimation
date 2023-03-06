@@ -13,7 +13,7 @@ The hand detect module we use the existing model of [victordibia](https://github
 ## Prepare environment
 
 1. python==3.8.16
-2. Install pytorch-cuda==11.7 following official instruction.
+2. Install pytorch-cuda==11.7 following [official instruction](https://pytorch.org/).
 3. Install the necessary dependencies by running:
 
         pip install -r requirements.txt. 
@@ -35,11 +35,11 @@ Main-folder/
 └── ...
 ```
 
-1. Put the downloaded FreiHAND dataset in **./data/**
+1. Put the downloaded [FreiHAND](https://github.com/lmb-freiburg/freihand) dataset in **./data/**
 
 Link: https://lmb.informatik.uni-freiburg.de/data/freihand/FreiHAND_pub_v2.zip
 
-2. Put the downloaded FreiHAND evaluation set in **./data/**
+2. Put the downloaded [FreiHAND](https://github.com/lmb-freiburg/freihand) evaluation set in **./data/**
 
 Link: https://lmb.informatik.uni-freiburg.de/data/freihand/FreiHAND_pub_v2_eval.zip
 
