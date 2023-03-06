@@ -66,7 +66,7 @@ Prepare camera and clear angle, good light, less noisy space. Run the following 
 
     python 3.real_time_2D_hand_pose_estimation.py --config-file "configs/eval_webcam.yaml"
     
-_Note: Our model only solves the one-handed recognition problem. If there are 2 or more hands, the model will randomly select one hand to predict. To predict multiple hands, please edit the code in the file 3.real_time_2D_hand_pose_estimation.py (because of resource and time limitations, we don't do this part)._
+_Note: Our model only solves the one-handed recognition problem. If there are 2 or more hands, the model will randomly select one hand to predict. To predict multiple hands, please edit the file 3.real_time_2D_hand_pose_estimation.py (because of resource and time limitations, we don't do this part)._
 
 ### Addition
 
