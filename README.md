@@ -4,7 +4,7 @@ This is a project we built for the subject CS406 - Image processing and applicat
 <p align="center">
   <img src=OurMethod.png/>
 </p>
-The hand detect module we use the existing model of victordibia (SSD architecture). With the Stacked Hourglass Network, we implemented based on the work of enghock1 and princeton-vl.
+The hand detect module we use the existing model of [victordibia](https://github.com/victordibia/handtracking) (SSD architecture). With the Stacked Hourglass Network, we implemented based on the work of [enghock1](https://github.com/enghock1/Real-Time-2D-and-3D-Hand-Pose-Estimation) and [princeton-vl](https://github.com/princeton-vl/pytorch_stacked_hourglass).
 
 ## Prepare environment
 
@@ -61,7 +61,7 @@ Prepare camera and clear angle, good light, less noisy space. Run the following 
 
     python 3.real_time_2D_hand_pose_estimation.py --config-file "configs/eval_webcam.yaml"
     
-_Note: Our model only solves the one-handed recognition problem. If there are 2 or more hands, the model will randomly select one hand to predict. To predict multiple hands, please edit the code in the file 3.real_time_2D_hand_pos_estimation.py (because of resource and time limitations, we don't do this part)._
+_Note: Our model only solves the one-handed recognition problem. If there are 2 or more hands, the model will randomly select one hand to predict. To predict multiple hands, please edit the code in the file 3.real_time_2D_hand_pose_estimation.py (because of resource and time limitations, we don't do this part)._
 
 ### Addition
 
