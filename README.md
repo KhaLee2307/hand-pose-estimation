@@ -13,7 +13,10 @@ The hand detect module we use the existing model of [victordibia](https://github
 ## Prepare environment
 
 1. python==3.8.16
-2. Install pytorch-cuda==11.7 following [official instruction](https://pytorch.org/).
+2. Install pytorch-cuda==11.7 following [official instruction](https://pytorch.org/):
+
+        conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
+        
 3. Install the necessary dependencies by running:
 
         pip install -r requirements.txt. 
