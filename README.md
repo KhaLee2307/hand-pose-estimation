@@ -82,3 +82,5 @@ To fine-tune the hyperparameters (BATCH_SIZE, NUM_WORKERS, DATA_SIZE, ...), you 
 ## Citation
 
 Newell, Alejandro & Yang, Kaiyu & Deng, Jia. (2016). [Stacked Hourglass Networks for Human Pose Estimation](https://arxiv.org/pdf/1603.06937.pdf). 9912. 483-499. 10.1007/978-3-319-46484-8_29.
+
+Victor Dibia (2017). [HandTrack: A Library For Prototyping Real-time Hand TrackingInterfaces using Convolutional Neural Networks](https://github.com/victordibia/handtracking)
