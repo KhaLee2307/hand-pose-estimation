@@ -81,4 +81,4 @@ To fine-tune the hyperparameters (BATCH_SIZE, NUM_WORKERS, DATA_SIZE, ...), you 
 
 ## Citation
 
-Newell, Alejandro & Yang, Kaiyu & Deng, Jia. (2016). [Stacked Hourglass Networks for Human Pose Estimation](https://arxiv.org/pdf/1603.06937.pdf). 9912. 483-499. 10.1007/978-3-319-46484-8_29.
+Newell, A., Yang, K. and Deng, J., 2016. [Stacked Hourglass Networks for Human Pose Estimation](https://link.springer.com/chapter/10.1007/978-3-319-46484-8_29). In Computer Vision–ECCV 2016: 14th European Conference, Amsterdam, The Netherlands, October 11-14, 2016, Proceedings, Part VIII 14 (pp. 483-499). Springer International Publishing.
