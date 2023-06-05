@@ -23,7 +23,7 @@ The hand detect module we use the existing model of [victordibia](https://github
         
 3. Install the necessary dependencies by running:
 
-        pip install -r requirements.txt. 
+        pip install -r requirements.txt 
 
 ## Prepare dataset
 
