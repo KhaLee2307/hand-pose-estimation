@@ -6,7 +6,7 @@
 
 ## Introduction
 
-This is a project we built for the subject CS406 - Image processing and applications (University of Information Technology - VNUHCM). In this project, we tested the Stacked Hourglass Network model (a fairly well-known model used for Human Pose Estimation). In addition, we switched from the usual bottom-up method to the top-down by adding a hand detect module. Here is the architecture model we use:
+This is a project we built for the Hand Pose Estimation problem. In this project, we tested the Stacked Hourglass Network model (a fairly well-known model used for Human Pose Estimation). In addition, we switched from the usual bottom-up method to the top-down by adding a hand detect module. Here is the architecture model we use:
 
 <p align="center">
   <img src=method.png/>
