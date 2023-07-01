@@ -53,6 +53,7 @@ Link: https://lmb.informatik.uni-freiburg.de/data/freihand/FreiHAND_pub_v2_eval.
 ## Running the code
 
 ### Training
+
 In this project, we focus on training Stacked Hourglass Network. As for the hand detect module, we'd like to use the victordibia's pretrained_model (SSD) without further modification. Train the hourglass network:
 
     python 1.train.py --config-file "configs/train_FreiHAND_dataset.yaml"
