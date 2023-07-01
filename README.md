@@ -6,7 +6,7 @@
 
 ## Introduction
 
-This is a project we built for the Hand Pose Estimation problem. In this project, we tested the Stacked Hourglass Network model (a fairly well-known model used for Human Pose Estimation). In addition, we switched from the usual bottom-up method to the top-down by adding a hand detect module. Here is the architecture model we use:
+This is a project we built for the Hand Pose Estimation problem. In this project, we tested the Stacked Hourglass Network model (a fairly well-known model used for Human Pose Estimation). In addition, we switched from the usual bottom-up method to the top-down by adding a hand-detect module. Here is the architecture model we use:
 
 <p align="center">
   <img src=method.png/>
@@ -14,10 +14,10 @@ This is a project we built for the Hand Pose Estimation problem. In this project
 
 The hand detect module we use the existing model of [victordibia](https://github.com/victordibia/handtracking) (SSD architecture). With the Stacked Hourglass Network, we implemented based on the work of [enghock1](https://github.com/enghock1/Real-Time-2D-and-3D-Hand-Pose-Estimation) and [princeton-vl](https://github.com/princeton-vl/pytorch_stacked_hourglass).
 
-## Prepare environment
+## Prepare the environment
 
 1. python==3.8.16
-2. Install pytorch-cuda==11.7 following [official instruction](https://pytorch.org/):
+2. Install PyTorch-cuda==11.7 following [official instruction](https://pytorch.org/):
 
         conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
         
@@ -25,15 +25,15 @@ The hand detect module we use the existing model of [victordibia](https://github
 
         pip install -r requirements.txt 
 
-## Prepare dataset
+## Prepare the dataset
 
-Please organizing your datasets for training and testing following this structure: 
+Please organize your datasets for training and testing following this structure: 
 
 ```
 Main-folder/
 │
 ├── data/ 
-│   ├── FreiHAND_pub_v2 - This folder contain data for training model
+│   ├── FreiHAND_pub_v2 - This folder contains data for the training model
 |   |   ├── ...
 |   |
 │   └── FreiHAND_pub_v2_eval - public test images
@@ -53,11 +53,11 @@ Link: https://lmb.informatik.uni-freiburg.de/data/freihand/FreiHAND_pub_v2_eval.
 ## Running the code
 
 ### Training
-In this project, we focus on training Stacked Hourglass Network. As for the hand detect module, we reuse the victordibia's pretrained_model (SSD) without further modified. Train the hourglass network:
+In this project, we focus on training Stacked Hourglass Network. As for the hand detect module, we'd like to use the victordibia's pretrained_model (SSD) without further modification. Train the hourglass network:
 
     python 1.train.py --config-file "configs/train_FreiHAND_dataset.yaml"
     
-The trained model weights (net_hm.pth) will be located at **Main-folder/**. Simply copy and paste the trained model into **./model/trained_models** before evaluate.
+The trained model weights (net_hm.pth) will be at **Main-folder/**. Copy and paste the trained model into **./model/trained_models** before evaluate.
 
 ### Evaluation
 
@@ -69,7 +69,7 @@ The visualization results will be saved to **./output/**
 
 ### Real-time hand pose estimation
 
-Prepare camera and clear angle, good light, less noisy space. Run the following command line:
+Prepare a camera with and clear angle, good light, and less noisy space. Run the following command line:
 
     python 3.real_time_2D_hand_pose_estimation.py --config-file "configs/eval_webcam.yaml"
     
