@@ -33,7 +33,7 @@ Please organize your datasets for training and testing following this structure:
 Main-folder/
 │
 ├── data/ 
-│   ├── FreiHAND_pub_v2 - This folder contains data for the training model
+│   ├── FreiHAND_pub_v2 - This folder contains data for training model
 |   |   ├── ...
 |   |
 │   └── FreiHAND_pub_v2_eval - public test images
