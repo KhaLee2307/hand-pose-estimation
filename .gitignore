@@ -27,9 +27,7 @@ share/python-wheels/
 MANIFEST
 
 /data/
-/demo_image/
-/trained_model/
-/indexing/
+/model/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
