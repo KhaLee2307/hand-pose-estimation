@@ -12,8 +12,6 @@ This is a project we built for the Hand Pose Estimation problem. In this project
   <img src=method.png/>
 </p>
 
-The hand detect module we use the existing model of [victordibia](https://github.com/victordibia/handtracking) (SSD architecture). With the Stacked Hourglass Network, we implemented based on the work of [enghock1](https://github.com/enghock1/Real-Time-2D-and-3D-Hand-Pose-Estimation) and [princeton-vl](https://github.com/princeton-vl/pytorch_stacked_hourglass).
-
 ## Prepare the environment
 
 1. python==3.8.16
@@ -80,6 +78,6 @@ _Note: Our model only solves the one-handed recognition problem. If there are 2 
 
 To fine-tune the hyperparameters (BATCH_SIZE, NUM_WORKERS, DATA_SIZE, ...), you can edit the .yaml files in the **./configs/** directory.
 
-## Citation
+## Acknowledgment
 
-Newell, A., Yang, K. and Deng, J., 2016. [Stacked Hourglass Networks for Human Pose Estimation](https://link.springer.com/chapter/10.1007/978-3-319-46484-8_29). In Computer Vision–ECCV 2016: 14th European Conference, Amsterdam, The Netherlands, October 11-14, 2016, Proceedings, Part VIII 14 (pp. 483-499). Springer International Publishing.
+The repo is developed based on [victordibia](https://github.com/victordibia/handtracking) and [enghock1](https://github.com/enghock1/Real-Time-2D-and-3D-Hand-Pose-Estimation). Thanks for your contribution.
